@@ -128,8 +128,8 @@ describe("Foreign Keys", () => {
       const query = `DELETE 
       FROM movies 
       WHERE id = ${movieId} 
-      AND id NOT IN (SELECT DISTINCT genre_id, actor_id, director_id, keyword_id, company_id 
-        FROM movie_genres, movie_actors, movie_directors, movie_keywords, movie_production_companies)`;
+      AND id NOT IN (SELECT DISTINCT movie_id 
+        FROM movie_genres, movie_ratings, movie_actors, movie_directors, movie_keywords, movie_production_companies)`;
       try {
         await db.delete(query);
       } catch (e) {}
@@ -153,6 +153,18 @@ describe("Foreign Keys", () => {
       WHERE movie_id = ${movieId};
 
       DELETE FROM movie_ratings
+      WHERE movie_id = ${movieId};
+      
+      DELETE FROM movie_actors
+      WHERE movie_id = ${movieId};
+
+      DELETE FROM movie_directors
+      WHERE movie_id = ${movieId};
+      
+      DELETE FROM movie_keywords
+      WHERE movie_id = ${movieId};
+
+      DELETE FROM movie_production_companies
       WHERE movie_id = ${movieId};`;
 
       await db.delete(query);
