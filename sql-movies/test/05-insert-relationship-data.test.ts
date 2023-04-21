@@ -89,7 +89,7 @@ describe("Insert Relationship Data", () => {
     "should insert genre relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const genreRows = (await db.selectMultipleRows(`select id, genre from genres`)) as GenreRow[];
+      const genreRows = (await db.selectMultipleRows(`select * from genres`)) as GenreRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -125,7 +125,7 @@ describe("Insert Relationship Data", () => {
     "should insert actor relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const actorRows = (await db.selectMultipleRows(`select id, full_name from actors`)) as ActorRow[];
+      const actorRows = (await db.selectMultipleRows(`select * from actors`)) as ActorRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -163,9 +163,7 @@ describe("Insert Relationship Data", () => {
     "should insert director relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const directorRows = (await db.selectMultipleRows(
-        `select id, full_name from directors`
-      )) as DirectorRow[];
+      const directorRows = (await db.selectMultipleRows(`select * from directors`)) as DirectorRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -199,7 +197,7 @@ describe("Insert Relationship Data", () => {
     "should insert keyword relationship data",
     async done => {
       const movies = await CsvLoader.movies();
-      const keywordRows = (await db.selectMultipleRows(`select id, keyword from keywords`)) as KeywordRow[];
+      const keywordRows = (await db.selectMultipleRows(`select * from keywords`)) as KeywordRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
       for (const imdbId of Object.keys(moviesByImdbId)) {
@@ -238,7 +236,7 @@ describe("Insert Relationship Data", () => {
     async done => {
       const movies = await CsvLoader.movies();
       const productionCompanyRows = (await db.selectMultipleRows(
-        `select id, company_name from production_companies`
+        `select * from production_companies`
       )) as ProductionCompanyRow[];
       const moviesByImdbId = _.groupBy(await CsvLoader.movies(), "imdbId");
 
